@@ -14,12 +14,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "funcionario")
-public class Funcionario {
+public class Funcionario extends EntidadeBase {
     
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     @Column(name = "nome", nullable = false, length = 150)
     private String nome;
 

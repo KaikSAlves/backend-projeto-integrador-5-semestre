@@ -15,11 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "animal")
-public class Animal {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Animal extends EntidadeBase{
 
     @Column(name = "nome", nullable = false, length = 150)
     private String nome;

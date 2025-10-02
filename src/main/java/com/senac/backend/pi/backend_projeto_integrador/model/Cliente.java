@@ -20,11 +20,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "cliente")
-public class Cliente {
-    
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Cliente extends EntidadeBase {
 
     @Column(name = "nome", nullable = false, length = 150)
     private String nome;
