@@ -29,7 +29,7 @@ public class GenericServiceImplementation<T extends EntidadeBase>{
     public T Update(T Obj) {
       T objAntigo = (T) rep.findById(Obj.getId()).orElse(null);
 
-      if(objAntigo != null)){
+      if(objAntigo != null){
         return (T) rep.save(objAntigo);
       }
 
