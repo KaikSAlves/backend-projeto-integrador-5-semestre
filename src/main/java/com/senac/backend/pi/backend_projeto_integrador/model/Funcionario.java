@@ -1,8 +1,6 @@
 package com.senac.backend.pi.backend_projeto_integrador.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +10,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "nome", nullable = false, length = 150)
     private String nome;
 

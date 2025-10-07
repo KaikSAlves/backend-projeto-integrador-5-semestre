@@ -45,6 +45,10 @@ public class UsuarioService {
         }
     }
 
+    public boolean existsInDatabase(Integer id){
+        return rep.existsById(id);
+    }
+
     private void updateData(Usuario ent, Usuario obj) {
         ent.setEmail(obj.getEmail());
         ent.setSenha(obj.getSenha());
