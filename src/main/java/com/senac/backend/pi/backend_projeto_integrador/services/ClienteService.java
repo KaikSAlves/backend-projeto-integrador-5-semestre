@@ -1,8 +1,9 @@
 package com.senac.backend.pi.backend_projeto_integrador.services;
 
+import com.senac.backend.pi.backend_projeto_integrador.model.Cliente;
 import com.senac.backend.pi.backend_projeto_integrador.model.Funcionario;
 import com.senac.backend.pi.backend_projeto_integrador.model.Usuario;
-import com.senac.backend.pi.backend_projeto_integrador.repository.FuncionarioRepository;
+import com.senac.backend.pi.backend_projeto_integrador.repository.ClienteRespository;
 import com.senac.backend.pi.backend_projeto_integrador.services.interfaces.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,51 +11,58 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FuncionarioService implements ICrudService<Funcionario> {
+public class ClienteService implements ICrudService<Cliente> {
 
     @Autowired
-    private FuncionarioRepository rep;
+    private ClienteRespository rep;
 
-    public Funcionario create(Funcionario funcionario){
 
-        if(funcionario == null) return funcionario;
-        return rep.save(funcionario);
+    @Override
+    public Cliente create(Cliente cliente) {
+
+        if(cliente == null) return cliente;
+
+        return rep.save(cliente);
     }
 
-    public List<Funcionario> findAll(){
+    @Override
+    public List<Cliente> findAll() {
         return rep.findAll();
     }
 
-    public Funcionario findById(Integer id){
+    @Override
+    public Cliente findById(Integer id) {
         return rep.findById(id).orElse(null);
     }
 
-    public void delete(Integer id){
+    @Override
+    public void delete(Integer id) {
 
         if(rep.existsById(id)){
             rep.deleteById(id);
         }
-
-
     }
 
-    public Funcionario update(Funcionario funcionario, Integer id){
+    @Override
+    public Cliente update(Cliente cliente, Integer id) {
+
         try{
-            Funcionario ent = rep.getReferenceById(id);
-            updateData(ent, funcionario);
+            Cliente ent = rep.getReferenceById(id);
+            updateData(ent, cliente);
             return rep.save(ent);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean existsInDatabase(Integer id){
+    @Override
+    public boolean existsInDatabase(Integer id) {
         return rep.existsById(id);
     }
 
-    private void updateData(Funcionario ent, Funcionario obj) {
+    public void updateData(Cliente ent, Cliente obj) {
         ent.setEmail(obj.getEmail());
-        ent.setEmail(obj.getEmail());
+        ent.setNome(obj.getNome());
         ent.setTelefone(obj.getTelefone());
     }
 }

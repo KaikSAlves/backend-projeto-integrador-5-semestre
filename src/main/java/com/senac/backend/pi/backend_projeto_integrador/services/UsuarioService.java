@@ -2,18 +2,21 @@ package com.senac.backend.pi.backend_projeto_integrador.services;
 
 import com.senac.backend.pi.backend_projeto_integrador.model.Usuario;
 import com.senac.backend.pi.backend_projeto_integrador.repository.UsuarioRepository;
+import com.senac.backend.pi.backend_projeto_integrador.services.interfaces.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements ICrudService<Usuario> {
 
     @Autowired
     private UsuarioRepository rep;
 
     public Usuario create(Usuario usuario){
+
+        if(usuario == null) return usuario;
         return rep.save(usuario);
     }
 
@@ -27,10 +30,8 @@ public class UsuarioService {
 
     public void delete(Integer id){
 
-        Usuario usuario = findById(id);
-
-        if(usuario != null){
-            rep.delete(usuario);
+        if(rep.existsById(id)){
+            rep.deleteById(id);
         }
 
     }
