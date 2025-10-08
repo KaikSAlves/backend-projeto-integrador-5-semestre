@@ -23,6 +23,10 @@ public class Cliente {
 
     @Column(name = "telefone", nullable = false, length = 15)
     private String telefone;
+
+    @OneToOne
+    @JoinColumn(name = "agendamento_id", referencedColumnName = "id")
+    private Agendamento agendamento;
     
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Animal> animais = new ArrayList<>();
@@ -53,6 +57,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Agendamento getAgendamento() {
+        return agendamento;
+    }
+
+    public void setAgendamento(Agendamento agendamento) {
+        this.agendamento = agendamento;
     }
 
     public Cliente(String nome, String email, String telefone) {

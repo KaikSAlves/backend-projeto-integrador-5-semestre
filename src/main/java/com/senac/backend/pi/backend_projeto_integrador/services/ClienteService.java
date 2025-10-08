@@ -64,5 +64,6 @@ public class ClienteService implements ICrudService<Cliente> {
         ent.setEmail(obj.getEmail());
         ent.setNome(obj.getNome());
         ent.setTelefone(obj.getTelefone());
+        ent.setAgendamento(obj.getAgendamento());
     }
 }

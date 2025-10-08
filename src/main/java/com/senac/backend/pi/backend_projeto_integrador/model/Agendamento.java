@@ -6,16 +6,15 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "angendamento")
+@Table(name = "agendamento")
 public class Agendamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     private Servicos servico;
-
-    private Cliente cliente;
 
     private LocalDateTime dataInicio;
 
@@ -35,14 +34,6 @@ public class Agendamento {
 
     public void setServico(Servicos servico) {
         this.servico = servico;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public LocalDateTime getDataInicio() {
@@ -69,6 +60,10 @@ public class Agendamento {
         this.finalizado = finalizado;
     }
 
+    public boolean getFinalizado() {
+        return this.finalizado;
+    }
+
     public double getValorFinal() {
         return valorFinal;
     }
@@ -77,9 +72,8 @@ public class Agendamento {
         this.valorFinal = valorFinal;
     }
 
-    public Agendamento(Servicos servico, Cliente cliente, LocalDateTime dataInicio, LocalDateTime dataFinal, boolean finalizado, double valorFinal) {
+    public Agendamento(Servicos servico, LocalDateTime dataInicio, LocalDateTime dataFinal, boolean finalizado, double valorFinal) {
         this.servico = servico;
-        this.cliente = cliente;
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
         this.finalizado = finalizado;
