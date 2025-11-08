@@ -57,6 +57,8 @@ public class AgendamentoService implements ICrudService<Agendamento> {
         ent.setFinalizado(agendamento.getFinalizado());
         ent.setValorFinal(agendamento.getValorFinal());
         ent.setServico(agendamento.getServico());
+        ent.setAnimais(agendamento.getAnimais());
+        ent.setCliente(agendamento.getCliente());
     }
 
     @Override

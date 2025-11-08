@@ -4,6 +4,8 @@ import com.senac.backend.pi.backend_projeto_integrador.model.enums.Servicos;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "agendamento")
@@ -23,6 +25,33 @@ public class Agendamento {
     private boolean finalizado;
 
     private double valorFinal;
+
+    @OneToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "agendamento", cascade = CascadeType.REMOVE)
+    private List<Animal> animais = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+    private Funcionario funcionario;
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setAnimais(List<Animal> animais) {
+        this.animais = animais;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public List<Animal> getAnimais() {
+        return animais;
+    }
 
     public Integer getId() {
         return id;

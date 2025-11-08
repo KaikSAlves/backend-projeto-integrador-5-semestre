@@ -1,5 +1,7 @@
 package com.senac.backend.pi.backend_projeto_integrador.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,14 +21,14 @@ public class Animal {
     private String raca;
 
     @Column(name = "idade", nullable = false)
-    private int idade;
+    private Date dataNascimento;
 
     @Column(name = "especie", nullable = false, length = 100)
     private String especie;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @JoinColumn(name = "agendamento_id")
+    private Agendamento agendamento;
 
     public Integer getId() {
         return id;
@@ -48,12 +50,12 @@ public class Animal {
         this.raca = raca;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getEspecie() {
@@ -64,18 +66,10 @@ public class Animal {
         this.especie = especie;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Animal(String nome, String raca, int idade, String especie) {
+    public Animal(String nome, String raca, int idade, String especie, Date dataNascimento) {
         this.nome = nome;
         this.raca = raca;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.especie = especie;
     }
 
