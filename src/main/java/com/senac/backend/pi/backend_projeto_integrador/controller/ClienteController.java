@@ -1,7 +1,6 @@
 package com.senac.backend.pi.backend_projeto_integrador.controller;
 
 import com.senac.backend.pi.backend_projeto_integrador.model.Cliente;
-import com.senac.backend.pi.backend_projeto_integrador.model.Funcionario;
 import com.senac.backend.pi.backend_projeto_integrador.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,60 +11,55 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/cliente")
+@RequestMapping("/api/clientes")
 public class ClienteController {
 
     @Autowired
-    private ClienteService service;
-
-
-    @PostMapping
-    public ResponseEntity<Cliente> create (@RequestBody Cliente cliente){
-
-        if(cliente != null){
-            cliente = service.create(cliente);
-
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(cliente.getId()).toUri();
-
-            return ResponseEntity.created(uri).body(cliente);
-        }
-
-        return ResponseEntity.badRequest().body(cliente);
-    }
+    private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll(){
-
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<Cliente>> listarTodos() {
+        List<Cliente> clientes = clienteService.findAll();
+        return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Cliente> findById(@PathVariable Integer id){
-        Cliente cliente = service.findById(id);
-
-        if(cliente == null) return ResponseEntity.notFound().build();
-
-        return ResponseEntity.ok().body(cliente);
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarPorId(@PathVariable Integer id) {
+        Cliente cliente = clienteService.findById(id);
+        if (cliente == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cliente);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Cliente> update (@PathVariable Integer id, @RequestBody Cliente cliente)
-    {
-        if(cliente == null) return ResponseEntity.badRequest().build();
-
-        if(!service.existsInDatabase(id)) return ResponseEntity.notFound().build();
-
-        return ResponseEntity.ok().body(service.update(cliente, id));
+    @PostMapping
+    public ResponseEntity<Cliente> criar(@RequestBody Cliente cliente) {
+        Cliente novoCliente = clienteService.create(cliente);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(novoCliente.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(novoCliente);
     }
 
-    @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizar(
+            @PathVariable Integer id,
+            @RequestBody Cliente cliente) {
+        if (!clienteService.existsInDatabase(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        Cliente clienteAtualizado = clienteService.update(cliente, id);
+        return ResponseEntity.ok(clienteAtualizado);
+    }
 
-        if(!service.existsInDatabase(id)) return ResponseEntity.notFound().build();
-
-        service.delete(id);
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        if (!clienteService.existsInDatabase(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        clienteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

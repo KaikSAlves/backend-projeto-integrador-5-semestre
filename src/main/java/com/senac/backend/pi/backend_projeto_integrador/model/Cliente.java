@@ -24,6 +24,9 @@ public class Cliente {
     @Column(name = "telefone", nullable = false, length = 15)
     private String telefone;
 
+    @Column(name = "senha", nullable = false, length = 200)
+    private String senha;
+
     public Integer getId() {
         return id;
     }
@@ -52,10 +55,19 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Cliente(String nome, String email, String telefone) {
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Cliente(String nome, String email, String telefone, String senha) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.senha = senha;
     }
 
     public Cliente(){
