@@ -1,8 +1,10 @@
 package com.senac.backend.pi.backend_projeto_integrador.model;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +22,9 @@ public class Animal {
     @Column(name = "raca", nullable = false, length = 100)
     private String raca;
 
-    @Column(name = "idade", nullable = false)
+    @Column(name = "data_nascimento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
     @Column(name = "especie", nullable = false, length = 100)
@@ -66,15 +70,14 @@ public class Animal {
         this.especie = especie;
     }
 
-    public Animal(String nome, String raca, int idade, String especie, Date dataNascimento) {
+    public Animal(String nome, String raca, String especie, Date dataNascimento) {
         this.nome = nome;
         this.raca = raca;
-        this.dataNascimento = dataNascimento;
         this.especie = especie;
+        this.dataNascimento = dataNascimento;
     }
 
     public Animal() {
-
     }
 
 }
