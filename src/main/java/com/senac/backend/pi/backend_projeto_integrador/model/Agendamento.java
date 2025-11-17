@@ -108,4 +108,7 @@ public class Agendamento {
         this.finalizado = finalizado;
         this.valorFinal = valorFinal;
     }
+
+    public Agendamento() {
+    }
 }
