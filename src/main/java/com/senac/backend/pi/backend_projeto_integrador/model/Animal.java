@@ -3,6 +3,7 @@ package com.senac.backend.pi.backend_projeto_integrador.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Animal {
     @Column(name = "especie", nullable = false, length = 100)
     private String especie;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
