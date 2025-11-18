@@ -27,6 +27,9 @@ public class Cliente {
     @Column(name = "senha", nullable = false, length = 200)
     private String senha;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+    private List<Animal> animais = new ArrayList<>();
+
     public Integer getId() {
         return id;
     }
@@ -37,6 +40,14 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Animal> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<Animal> animais) {
+        this.animais = animais;
     }
 
     public String getEmail() {

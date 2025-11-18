@@ -62,6 +62,7 @@ public class AnimalService implements ICrudService<Animal> {
         ent.setRaca(obj.getRaca());
         ent.setEspecie(obj.getEspecie());
         ent.setNome(obj.getNome());
+        ent.setCliente(obj.getCliente());
         ent.setDataNascimento(obj.getDataNascimento());
     }
 }

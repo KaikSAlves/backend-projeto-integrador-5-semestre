@@ -30,9 +30,6 @@ public class Agendamento {
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "agendamento", cascade = CascadeType.REMOVE)
-    private List<Animal> animais = new ArrayList<>();
-
     @OneToOne
     @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
     private Funcionario funcionario;
@@ -41,17 +38,10 @@ public class Agendamento {
         this.cliente = cliente;
     }
 
-    public void setAnimais(List<Animal> animais) {
-        this.animais = animais;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
 
-    public List<Animal> getAnimais() {
-        return animais;
-    }
 
     public Integer getId() {
         return id;

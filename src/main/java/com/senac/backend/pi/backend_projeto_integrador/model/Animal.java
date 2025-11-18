@@ -31,8 +31,8 @@ public class Animal {
     private String especie;
 
     @ManyToOne
-    @JoinColumn(name = "agendamento_id")
-    private Agendamento agendamento;
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public Integer getId() {
         return id;
@@ -70,11 +70,20 @@ public class Animal {
         this.especie = especie;
     }
 
-    public Animal(String nome, String raca, String especie, Date dataNascimento) {
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Animal(String nome, String raca, String especie, Date dataNascimento, Cliente cliente) {
         this.nome = nome;
         this.raca = raca;
         this.especie = especie;
         this.dataNascimento = dataNascimento;
+        this.cliente = cliente;
     }
 
     public Animal() {
