@@ -49,6 +49,12 @@ public class AnimalController {
         return ResponseEntity.ok().body(animal);
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Animal>> findByClienteId(@PathVariable Integer clienteId) {
+        List<Animal> animais = service.findByClienteId(clienteId);
+        return ResponseEntity.ok().body(animais);
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Animal> update (@PathVariable Integer id, @RequestBody Animal animal)
     {

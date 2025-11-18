@@ -65,4 +65,8 @@ public class AnimalService implements ICrudService<Animal> {
         ent.setCliente(obj.getCliente());
         ent.setDataNascimento(obj.getDataNascimento());
     }
+    
+    public List<Animal> findByClienteId(Integer clienteId) {
+        return rep.findByClienteId(clienteId);
+    }
 }
