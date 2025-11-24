@@ -26,10 +26,10 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Cliente cliente = clienteRespository.save(new Cliente("kaik", "kaik@gmail.com", "kaik",""));
+       /*  Cliente cliente = clienteRespository.save(new Cliente("kaik", "kaik@gmail.com", "kaik",""));
 
-        animalRepository.save(new Animal("kaik", "", "asd", new Date(), cliente));
-
+        animalRepository.save(new Animal("Max", "Pastor Alemão", "Cachorro", new Date("01/09/2023"), cliente));
+ */
 
     }
     
